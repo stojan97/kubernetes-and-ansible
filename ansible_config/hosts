@@ -1,7 +1,11 @@
-master ansible_host=localhost ansible_port=3000 ansible_user=kube-master
-node ansible_host=localhost ansible_port=2000 ansible_user=kube-node
+[masters]
+master ansible_host=localhost ansible_port=2000 ansible_user=ubuntu
 
+[workers]
+worker ansible_host=localhost ansible_port=3000 ansible_user=ubuntu
 
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
 
 # master ip: 10.0.2.4
 # node ip: 10.0.2.15

@@ -3,8 +3,25 @@
   become_user: ubuntu
   tasks:
     - name: set up db
-      shell: kubectl apply -f ../deployments/db-deployment.yaml >> db.txt
+      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/master/deployments/db-deployment.yaml >> db.txt
       args:
         chdir: $HOME
         creates: db.txt
+        
+    - name: set up volume
+      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/master/deployments/web-claim0-persistentvolumeclaim.yaml >> volume.txt
+      args:
+        chdir: $HOME
+        creates: volume.txt
+        
+    - name: set up web app
+      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/master/deployments/web-deployment.yaml >> web.txt
+      args:
+        chdir: $HOME
+        creates: web.txt
 
+    - name: set up web app
+      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/master/deployments/web-service.yaml >> service.txt
+      args:
+        chdir: $HOME
+        creates: service.txt

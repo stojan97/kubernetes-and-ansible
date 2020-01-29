@@ -23,7 +23,7 @@ spec:
         - python
         - -u
         - app.py
-        image: web
+        image: stojan97/web
         name: web
         ports:
         - containerPort: 5000

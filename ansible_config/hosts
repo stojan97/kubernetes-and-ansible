@@ -7,5 +7,5 @@ worker ansible_host=localhost ansible_port=3000 ansible_user=ubuntu
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
 
-# master ip: 10.0.2.4
-# node ip: 10.0.2.15
+# master ip: 10.0.2.15
+# node ip: 10.0.2.7

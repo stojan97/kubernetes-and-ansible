@@ -7,8 +7,7 @@ from pymongo import MongoClient
 app = Flask(__name__)
 randomUUID = str(uuid.uuid4())
 
-client = MongoClient(os.environ.get('DB_PORT_27017_TCP_ADDR'), 27017)
-print('OS ENV: HHHHH ', os.environ.get('DB_PORT_27017_TCP_ADDR'))
+client = MongoClient('mongodb://mongo')
 db = client.fikt
 
 @app.route('/')

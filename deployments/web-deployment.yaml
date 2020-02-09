@@ -21,7 +21,4 @@ spec:
         image: stojan97/web
         ports:
         - containerPort: 5000
-        env:
-        - name: DB_PORT_27017_TCP_ADDR
-          value: "127.0.0.1"
       restartPolicy: Always

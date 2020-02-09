@@ -9,9 +9,13 @@ randomUUID = str(uuid.uuid4())
 client = MongoClient('mongodb://mongo')
 db = client.fikt
 
-@app.route('/add')
+@app.route('/add/1')
 def add_student():
     db.student.save({index: "INKI254", firstname:"Stojan", lastname:"Samojlovski"})
+    
+@app.route('/add/2')
+def add_student():
+    db.student.save({index: "INKI301", firstname:"Stefan", lastname:"Samojlovski"})
 
 @app.route('/')
 def get_students():

@@ -6,9 +6,12 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 randomUUID = str(uuid.uuid4())
-
 client = MongoClient('mongodb://mongo')
 db = client.fikt
+
+@app.route('/add')
+def add_student():
+    db.student.save({index: "INKI254", firstname:"Stojan", lastname:"Samojlovski"})
 
 @app.route('/')
 def get_students():

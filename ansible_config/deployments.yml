@@ -2,26 +2,26 @@
   become: true
   become_user: ubuntu
   tasks:
-    - name: set up db
+    - name: deploy db container
       shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/dev/deployments/db-deployment.yaml >> db.txt
       args:
         chdir: $HOME
         creates: db.txt
         
-    - name: set up volume
-      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/dev/deployments/web-claim0-persistentvolumeclaim.yaml >> volume.txt
+    - name: deploy db service
+      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/dev/deployments/db-service.yaml >> db_service.txt
       args:
         chdir: $HOME
-        creates: volume.txt
+        creates: db_service.txt    
         
-    - name: set up web app
+    - name: deploy web container
       shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/dev/deployments/web-deployment.yaml >> web.txt
       args:
         chdir: $HOME
         creates: web.txt
 
-    - name: set up web service
-      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/dev/deployments/web-service.yaml >> service.txt
+    - name: deploy web service
+      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/dev/deployments/web-service.yaml >> web_service.txt
       args:
         chdir: $HOME
-        creates: service.txt
+        creates: web_service.txt

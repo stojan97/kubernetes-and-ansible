@@ -1,25 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: /snap/kompose/1/./kompose-linux-amd64 convert
-    kompose.version: 1.18.0 (06a2e56)
-  creationTimestamp: null
-  labels:
-    io.kompose.service: db
   name: db
+  labels:
+    app: db
 spec:
+  selector:
+    matchLabels:
+      app: db
   replicas: 1
   strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        io.kompose.service: db
+        app: db
     spec:
       containers:
       - image: mongo:4.0.4
         name: db
-        resources: {}
       restartPolicy: Always
-status: {}

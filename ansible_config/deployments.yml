@@ -2,9 +2,42 @@
   become: true
   become_user: ubuntu
   tasks:
-    - name: set up db
-      shell: kubectl apply -f ../deployments/db-deployment.yaml >> db.txt
+    - name: Remove db.txt
+      file:
+        state: absent
+        path: "/home/ubuntu/db.txt"
+        
+    - name: deploy db
+      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/dev/deployments/db-deployment.yaml >> db.txt
       args:
         chdir: $HOME
-        creates: db.txt
+    
+    - name: Remove db_service.txt
+      file:
+        state: absent
+        path: "/home/ubuntu/db_service.txt"
+        
+    - name: deploy db service
+      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/dev/deployments/db-service.yaml >> db_service.txt
+      args:
+        chdir: $HOME
+    
+    - name: Remove web.txt
+      file:
+        state: absent
+        path: "/home/ubuntu/web.txt"
+    
+    - name: deploy web
+      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/dev/deployments/web-deployment.yaml >> web.txt
+      args:
+        chdir: $HOME
 
+    - name: Remove web_service.txt
+      file:
+        state: absent
+        path: "/home/ubuntu/web_service.txt"     
+
+    - name: deploy web service
+      shell: kubectl apply -f https://raw.githubusercontent.com/stojan97/kubernetes-and-ansible/dev/deployments/web-service.yaml >> web_service.txt
+      args:
+        chdir: $HOME

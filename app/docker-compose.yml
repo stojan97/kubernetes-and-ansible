@@ -1,6 +1,5 @@
 web:
-  build: .
-  command: python -u app.py
+  image: stojan97/web:latest
   ports:
     - "5000:5000"
   volumes:

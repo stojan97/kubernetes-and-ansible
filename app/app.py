@@ -6,9 +6,13 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 randomUUID = str(uuid.uuid4())
-
-client = MongoClient(os.environ['DB_PORT_27017_TCP_ADDR'], 27017)
+client = MongoClient('mongodb://mongo')
 db = client.fikt
+
+@app.route('/add')
+def add_student():
+    db.student.insert_one({'index': 'INKI254', 'firstname':'Stojan', 'lastname':'Samojlovski'})
+    return 'Added new user.'
 
 @app.route('/')
 def get_students():
@@ -16,6 +20,7 @@ def get_students():
     items_dir = [items for items in _items]
     items_res = list(map(lambda x: x['index'] + ' ' + x['firstname'], items_dir))
 
+    
     str = "Running on server : " + randomUUID + '\n'
     str += '::: Students:  '
     str += ', '.join(items_res)
@@ -25,4 +30,3 @@ if __name__ == '__main__':
     app.run('0.0.0.0')
 
 #db.student.save({index: "INKI254", firstname:"Stojan", lastname:"Samojlovski"})
-#[{'_id': ObjectId('5e3119cbda49c3db1cf43624'), 'index': 'INKI254', 'firstname': 'Stojan', 'lastname': 'Samojlovski'}]
